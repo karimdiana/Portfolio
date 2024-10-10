@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slang Dictionary</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to the stylesheet -->
+</head>
+<body>
+    <div class="container">
+        <h1>Slang Dictionary</h1>
+        <input type="text" id="search" placeholder="Search for a term..." onkeyup="searchTerm()">
+
+        <div id="definitionList"></div> <!-- List of definitions -->
+
+        <div id="pageInfo"></div> <!-- Page info for pagination -->
+
+        <div class="pagination">
+            <button id="prevPage" onclick="changePage(-1)" disabled>Previous</button>
+            <button id="nextPage" onclick="changePage(1)" disabled>Next</button>
+        </div>
+
+        <button onclick="addTerm()">Add Term</button> <!-- Button to add new terms -->
+    </div>
+
+    <script>
+        let definitions = {}; // Store definitions fetched from the server
+        let comments = {}; // Store comments for each term
+        let currentPage = 1; // Current page for pagination
+        const itemsPerPage = 10; // Definitions shown per page
+        let filteredDefinitions = []; // Filtered definitions based on search input
+
+        // Fetch definitions from the server
+        fetch('/definitions') 
+            .then(response => response.json())
+            .then(data => {
+                definitions = data; // Store definitions for later use
+                filteredDefinitions = Object.entries(definitions); // Show all definitions initially
+                updateDefinitions(); // Update the displayed definitions
+            })
+            .catch(error => console.error('Error fetching definitions:', error));
+
+        // Function to search for terms
+        function searchTerm() {
+            const searchInput = document.getElementById("search").value.toLowerCase();
+            filteredDefinitions = Object.entries(definitions).filter(([term]) => term.includes(searchInput));
+            currentPage = 1; // Reset to first page
+            updateDefinitions(); // Update displayed definitions
+        }
+
+        // Function to update the displayed definitions
+        function updateDefinitions() {
+            const definitionList = document.getElementById("definitionList");
+            const pageInfo = document.getElementById("pageInfo");
+            const prevButton = document.getElementById("prevPage");
+            const nextButton = document.getElementById("nextPage");
+
+            definitionList.innerHTML = ""; // Clear previous results
+            if (filteredDefinitions.length === 0) {
+                definitionList.innerHTML = "<p>Definition not found.</p>";
+                pageInfo.innerText = '';
+                prevButton.disabled = true;
+                nextButton.disabled = true;
+                return;
+            }
+
+            // Calculate start and end indices for the current page
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageDefinitions = filteredDefinitions.slice(start, end); // Get definitions for current page
+
+            // Display each term and its definition
+            pageDefinitions.forEach(([term, definition]) => {
+                const userComments = comments[term] || []; // Get existing comments for the term
+                const commentsHTML = userComments.length > 0 ? 
+                    userComments.map(comment => `<p>${comment}</p>`).join('') : 
+                    `<p>No comments yet. Be the first to comment!</p>`;
+                
+                const definitionHTML = `
+                    <div class="definition">
+                        <h2>${term}</h2>
+                        <p>${definition}</p>
+                        <div class="user-comments">
+                            <h3>User Comments:</h3>
+                            ${commentsHTML}
+                            <button onclick="addComment('${term}')">Add Comment</button>
+                        </div>
+                    </div>
+                `;
+                definitionList.innerHTML += definitionHTML; // Add term and comments to the display
+            });
+
+            // Update pagination info
+            pageInfo.innerText = `Page ${currentPage} of ${Math.ceil(filteredDefinitions.length / itemsPerPage)}`;
+            prevButton.disabled = currentPage === 1; // Disable previous button on first page
+            nextButton.disabled = currentPage === Math.ceil(filteredDefinitions.length / itemsPerPage); // Disable next button on last page
+        }
+
+        // Function to change the current page
+        function changePage(direction) {
+            currentPage += direction;
+            updateDefinitions(); // Refresh definitions to display
+        }
+
+        // Function to add a new term to the dictionary
+        function addTerm() {
+            const newTerm = prompt("Enter a new slang term:");
+            const newDefinition = prompt("Enter the definition:");
+            if (newTerm && newDefinition) {
+                definitions[newTerm.toLowerCase()] = newDefinition; // Add new term and definition
+                comments[newTerm.toLowerCase()] = []; // Initialize comments for the new term
+                alert(`Term "${newTerm}" added!`);
+                filteredDefinitions.push([newTerm.toLowerCase(), newDefinition]); // Add to filtered definitions
+                updateDefinitions(); // Refresh displayed definitions
+            }
+        }
+
+        // Function to add a comment to a term
+        function addComment(term) {
+            const newComment = prompt("Enter your comment:");
+            if (newComment) {
+                if (!comments[term]) {
+                    comments[term] = []; // Initialize comments array if it doesn't exist
+                }
+                comments[term].push(newComment); // Add the new comment to the term
+                updateDefinitions(); // Refresh to show the new comment
+            }
+        }
+    </script>
+</body>
+</html>
