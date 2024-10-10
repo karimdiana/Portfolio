@@ -1,32 +1,16 @@
-# Portfolio
+# Slang Translator
 
-Hey, I'm Diana from Almaty, Kazakhstan! Welcome to my portfolio folder.
+Slang Translator is a fun and interactive web application that allows users to explore and understand various slang terms, inspired by platforms like Urban Dictionary. The goal is to make learning about slang enjoyable and accessible for everyone.
 
-## Projects
+## Current TODO List:
 
-### Slang Translator
-This project is a slang translator inspired by platforms like Urban Dictionary. It allows users to explore and understand various slang terms in a fun and interactive way.
+- Implement user authentication for saving favorite slang terms
+- Add a feature for users to submit new slang terms and definitions
+- Expand the database with more slang terms from various regions
+- Improve the UI for better user experience
+- Include audio pronunciations for slang terms
+- Create a mobile-friendly design
 
-**Tech Stack:**
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Node.js, Express
-- **Database**: MongoDB
+**As of 10/10, this project is under construction and not in production.**
 
----
-
-### Valid Volunteer App
-This app connects volunteers with opportunities to help others in their community. It aims to make the process of finding and participating in volunteer work easier and more accessible.
-
-**Tech Stack:**
-- **Frontend**: HTML, CSS, JavaScript
-- **Backend**: Node.js, Express
-- **Database**: MongoDB
-- **Design Tools**: Figma
-
----
-
-## Future Aspirations
-I want to be a UX/UI designer and create designs that focus on the user experience. I believe good design can solve problems and make interactions better.
-
-Thank you for checking out my portfolio! If you have any questions or would like to connect, feel free to reach out. 
-You can find me on LinkedIn: [Diana Karim.](https://www.linkedin.com/in/karimdiana/)
+Thank you for checking out Slang Translator! If you have any questions or would like to connect, feel free to reach out.
