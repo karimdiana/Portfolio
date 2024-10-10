@@ -28,4 +28,5 @@ This app connects volunteers with opportunities to help others in their communit
 ## Future Aspirations
 I want to be a UX/UI designer and create designs that focus on the user experience. I believe good design can solve problems and make interactions better.
 
-Thank you for checking out my portfolio! If you have any questions or would like to connect, feel free to reach out. You can find me on LinkedIn: Diana Karim.
+Thank you for checking out my portfolio! If you have any questions or would like to connect, feel free to reach out. 
+You can find me on LinkedIn: [Diana Karim.](https://www.linkedin.com/in/karimdiana/)
