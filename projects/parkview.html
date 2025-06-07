@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkview PDF Processing - Diana's Projects</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,401,400,501,701,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="nav-container">
+        
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#work">My Work</a></li>
+                <li><a href="../about.html">About Me</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="project-detail">
+        <div class="project-container" style="margin-top: 100px;">
+            <div class="project-header">
+                <h1>Medical Data Processing to Electronic Medical Records</h1>
+                <a href="mailto:karimdianaa@outlook.com?subject=Request%20for%20Parkview%20PDF%20Processor%20Code&body=Hi%20Diana,%0D%0A%0D%0AI'm%20interested%20in%20viewing%20the%20code%20for%20the%20Parkview%20PDF%20Processor%20project.%0D%0A%0D%0ABest%20regards" class="github-link">
+                    <i class="fas fa-code"></i> Code Available Upon Request
+                </a>
+            </div>
+            <p class="back-to-work-link"><a href="../index.html#work">← Back to My Work</a></p>
+            
+            <div class="project-content">
+                <div class="project-showcase parkview-gallery">
+                    <div class="gallery-container">
+                        <div class="gallery-slide active">
+                            <img src="../assets/GeneInteraction.png" alt="Gene Interaction Visualization">
+                            <div class="gallery-caption">
+                                <h3>Interactive Gene-Medication Interaction Graph</h3>
+                            </div>
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="../assets/Parkview_MainPage.png" alt="PDF Data Extraction Process">
+                            <div class="gallery-caption">
+                                <h3>Automated Data Extraction and Processing</h3>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="gallery-controls">
+                        <button class="gallery-btn prev">Previous</button>
+                        <div class="gallery-dots"></div>
+                        <button class="gallery-btn next">Next</button>
+                    </div>
+                </div>
+
+                <div class="project-overview">
+                    <h2>About the Project</h2>
+                    <p>Developed for the Parkview Packnett Family Cancer Institute, this application addresses a critical need in healthcare data management. The Precision Genomics team at Parkview Health processes numerous genomic sequencing test results that are currently stored as PDF documents in patient medical records.</p>
+                    
+                    <p>The program automates the extraction of patient data from these PDFs, converts it into structured data fields, and stores it in a secure database. This enables healthcare providers to:</p>
+                    <ul>
+                        <li>Quickly locate and access patient genomic data</li>
+                        <li>Run automated reports on the structured data</li>
+                        <li>Reduce manual data entry and potential errors</li>
+                        <li>Efficiently correlate genomic sequences with patient information</li>
+                    </ul>
+
+                    <p>Due to the sensitive nature of healthcare data and HIPAA compliance requirements, the source code is available upon request. Please contact me for more information.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const dots = document.querySelector('.gallery-dots');
+            const prevBtn = document.querySelector('.gallery-btn.prev');
+            const nextBtn = document.querySelector('.gallery-btn.next');
+            let currentSlide = 0;
+
+         
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('gallery-dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dots.appendChild(dot);
+            });
+
+            function updateSlides() {
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('active');
+                    if (index === currentSlide) slide.classList.add('active');
+                });
+                document.querySelectorAll('.gallery-dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlides();
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlides();
+            }
+
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                updateSlides();
+            }
+
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+         
+        });
+    </script>
+</body>
+</html> 
